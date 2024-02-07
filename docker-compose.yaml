@@ -17,7 +17,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_USER: titiura
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123456
       POSTGRES_DB: alura_loja
     volumes:
