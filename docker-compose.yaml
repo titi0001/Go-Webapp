@@ -16,14 +16,19 @@ services:
 
   postgres:
     image: postgres:latest
+    ports:
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
+      POSTGRES_PASSWORD: 123456789
       POSTGRES_DB: alura_loja
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - pg-network
+    # extra_hosts:
+      # - "host.docker.internal:<docker0 IP>"
+    # conectar como localhost host.docker.internal
 
 volumes:
   pgadmin-data:
