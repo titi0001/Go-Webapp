@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 	"html/template"
 	"net/http"
 	"log"
@@ -18,29 +17,15 @@ type Produto struct {
 	Quantidade int
 }
 
-const (
-	user     = "postgres"
-	password = "123456"
-	dbname   = "alura_loja"
-	host     = "172.20.0.2"
-	sslmode  = "disable"
-)
 
 func conectaDb() (*sql.DB, error) {
-	conexao := fmt.Sprintf("user=%s dbname=%s password=%s host=%s sslmode=%s", user, dbname, password, host, sslmode)
+	// conexao := "postgres://postgres:123456789@localhost/alura_loja?sslmode=disable"
+	conexao := "user=postgres dbname=alura_loja password=123456789 host=localhost port=42381 sslmode=disable"
 	db, err := sql.Open("postgres", conexao)
 	if err != nil {
 		log.Printf("Erro ao abrir a conexão com o banco de dados: %v\n", err)
 		return nil, err
 	}
-
-	err = db.Ping()
-	if err != nil {
-		log.Printf("Erro ao fazer ping no banco de dados: %v\n", err)
-		db.Close()
-		return nil, err
-	}
-
 	log.Println("Conexão bem-sucedida com o banco de dados!")
 	return db, nil
 }
@@ -49,7 +34,7 @@ var temp = template.Must(template.ParseGlob("templates/*.html"))
 
 func main() {
 	http.HandleFunc("/", index)
-	http.ListenAndServe(":3000", nil)
+	http.ListenAndServe(":5000", nil)
 }
 
 func index(w http.ResponseWriter, r *http.Request) {

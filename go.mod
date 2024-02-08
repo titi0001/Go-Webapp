@@ -1,4 +1,4 @@
-module goRESTORM
+module Go-REST-ORM
 
 go 1.21.4
 
