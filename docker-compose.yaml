@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: titiura@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 47523146phB@
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+      - pgadmin-logs:/var/log/pgadmin
+    networks:
+      - pg-network
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "54499:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123456789
+      POSTGRES_DB: alura_loja
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - pg-network
+    # extra_hosts:
+      # - "host.docker.internal:<docker0 IP>"
+    # conectar como localhost host.docker.internal
+
+volumes:
+  pgadmin-data:
+  pgadmin-logs:
+  postgres-data:
+
+networks:
+  pg-network:
+    driver: bridge
