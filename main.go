@@ -1,21 +1,12 @@
 package main
 
 import (
-	"html/template"
 	"net/http"
-
-	"github.com/titi001/models"
+	"github.com/titi0001/Go-REST-ORM/routes"
 )
 
-var temp = template.Must(template.ParseGlob("templates/*.html"))
-
 func main() {
-	http.HandleFunc("/", index)
-	http.ListenAndServe(":5000", nil)
-}
 
-func index(w http.ResponseWriter, r *http.Request) {
-
-	todosOsProdutos := models.BuscaTodosOsProdutos
-	temp.ExecuteTemplate(w, "Index", todosOsProdutos)
+	routes.CarregaRotas()
+	http.ListenAndServe(":9000", nil)
 }
