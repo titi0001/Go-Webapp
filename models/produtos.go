@@ -13,7 +13,7 @@ type Produto struct {
 }
 
 func BuscaTodosOsProdutos() []Produto {
-	db, err := db.ConectaDb()
+	db := db.ConectaDb()
 
 	selectDeTodosOsProdutos, err := db.Query("SELECT * FROM produtos")
 	if err != nil {
