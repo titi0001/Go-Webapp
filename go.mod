@@ -1,4 +1,4 @@
-module Go-REST-ORM
+module github.com/titi0001/Go-REST-ORM
 
 go 1.21.4
 
