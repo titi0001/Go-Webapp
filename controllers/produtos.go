@@ -33,11 +33,11 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 		preco := r.FormValue("preco")
 		quantidade := r.FormValue("quantidade")
 
-		precoConvertido, err := strconv.ParseFloat(preco, float64)
+		precoConvertido, err := strconv.ParseFloat(preco, 64)
 		if err != nil {
 			log.Println("Erro na conversão do preço:", err)
 		}
-		quantidadeConvertido, err := strconv.Atoi(quantidade, int)
+		quantidadeConvertido, err := strconv.Atoi(quantidade)
 		if err != nil {
 			log.Println("Erro na conversão de quantidade:", err)
 		}
