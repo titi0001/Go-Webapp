@@ -15,7 +15,6 @@ func ConectaDb() (*sql.DB, error ){
 		log.Printf("Erro ao abrir a conexão com o banco de dados: %v\n", err)
 		return nil, err
 	}
-	log.Println("Conexão bem-sucedida com o banco de dados!")
 	return db, nil
 }
 
