@@ -37,6 +37,7 @@ func BuscaTodosOsProdutos() ([]Produto, error) {
 		}
 
 		p := Produto{
+			Id:         id,
 			Nome:       nome,
 			Descricao:  descricao,
 			Preco:      preco,
@@ -49,7 +50,7 @@ func BuscaTodosOsProdutos() ([]Produto, error) {
 	return produtos, nil
 }
 
-func CriarNovoProduto(nome, descricao string, preco float64, quantidade int)  {
+func CriarNovoProduto(nome, descricao string, preco float64, quantidade int) {
 	db, _ := db.ConectaDb()
 
 	insereDados, err := db.Prepare("insert into produtos(nome, descricao, preco, quantidade) values ($1, $2, $3, $4)")
@@ -58,5 +59,17 @@ func CriarNovoProduto(nome, descricao string, preco float64, quantidade int)  {
 	}
 
 	insereDados.Exec(nome, descricao, preco, quantidade)
+	defer db.Close()
+}
+
+func DeletaProduto(id string) {
+	db, _ := db.ConectaDb()
+
+	deletarOProduto, err := db.Prepare("delete from produtos where id=$1") 
+	if err != nil {
+		panic(err.Error())
+	}
+
+	deletarOProduto.Exec(id)
 	defer db.Close()
 }
